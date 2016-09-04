@@ -173,9 +173,10 @@ public class Map : MonoBehaviour {
 
 	private void DrawPath(Ant ant) {
 		LineRenderer line = GetComponent<LineRenderer>();
-		line.SetVertexCount(Count);
+		line.SetVertexCount(Count + 1);
 		for (int i = 0; i < Count; i++) {
 			line.SetPosition(i, cities[ant.paths[i]].Position);
 		}
+		line.SetPosition(Count, cities[ant.paths[0]].Position);
 	}
 }
