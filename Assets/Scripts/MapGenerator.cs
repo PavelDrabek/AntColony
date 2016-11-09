@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class MapGenerator : MonoBehaviour {
 
 	public City prefabCity;
-	public Ant prefabAnt;
+	public OptimizationAnt prefabAnt;
 	public Map map;
 
 	public Vector3 from, to;
@@ -23,9 +23,9 @@ public class MapGenerator : MonoBehaviour {
 			map.cities[i] = city;
 		}
 
-		List<Ant> ants = new List<Ant>();
+		List<OptimizationAnt> ants = new List<OptimizationAnt>();
 		for (int i = 0; i < 50; i++) {
-			ants.Add(Instantiate(prefabAnt) as Ant);
+			ants.Add(Instantiate(prefabAnt) as OptimizationAnt);
 		}
 		map.ants = ants;
 	}

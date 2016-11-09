@@ -17,7 +17,7 @@ public class Map : MonoBehaviour {
 	public City[] cities;
 	public int Count { get { return cities.Length; } }
 
-	public List<Ant> ants;
+	public List<OptimizationAnt> ants;
 
 	private float[][] distances;
 	private float[][] pheromones;
@@ -171,7 +171,7 @@ public class Map : MonoBehaviour {
 		}
 	}
 
-	private void DrawPath(Ant ant) {
+	private void DrawPath(OptimizationAnt ant) {
 		LineRenderer line = GetComponent<LineRenderer>();
 		line.SetVertexCount(Count + 1);
 		for (int i = 0; i < Count; i++) {
