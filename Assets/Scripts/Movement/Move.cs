@@ -13,7 +13,6 @@ public class Move : MonoBehaviour {
 	void Update () {
 		Vector3 velocity = destination - transform.position;
 		if (velocity.magnitude < speed * Time.deltaTime) {
-			Debug.Log ("velocity: " + velocity);
 			if (OnMoveFinish != null) {
 				OnMoveFinish(destination);
 			}
@@ -21,9 +20,9 @@ public class Move : MonoBehaviour {
 		transform.position += (velocity.normalized * speed * Time.deltaTime);
 	}
 
-	public void SetDirection(Vector3 direction) {
-		Debug.Log ("direction: " + direction);
-		destination = transform.position + direction;
+	public void SetDestination(Vector3 destination) {
+		this.destination = destination;
 		transform.LookAt (destination, Vector3.up);
 	}
+
 }
