@@ -3,11 +3,12 @@ using System.Collections;
 
 public class MVAnthillRadius : MoveValidator {
 
-	public Anthill anthill;
+	private Anthill anthill;
 	public float maxHomeDistance;
 
-	public override void Init() {
-		anthill = GetComponent<Ant>().anthill;
+	public override void Init(Ant ant) {
+		base.Init(ant);
+		anthill = ant.anthill;
 	}
 
 	public override bool CanMove (Vector3 destination)

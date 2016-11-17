@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class Ant : MonoBehaviour {
 
-	private MoveGenerator moveGenerator;
-	private MoveValidator moveValidator;
+	public MoveGenerator moveGenerator;
+	public MoveValidator moveValidator;
 	private Move move;
 
 
@@ -19,15 +19,20 @@ public class Ant : MonoBehaviour {
 	public GameObject sugarPeace = null;
 
 	void Awake() {
-		moveGenerator = GetComponent<MoveGenerator>();
-		moveValidator = GetComponent<MoveValidator>();
+		if(moveGenerator == null) {
+			moveGenerator = GetComponent<MoveGenerator>();
+		}
+		if(moveValidator == null) {
+			moveValidator = GetComponent<MoveValidator>();
+		}
 		move = GetComponent<Move>();
 		isReturning = false;
 	}
 
 	public void Init(Anthill anthill) {
 		this.anthill = anthill;
-		moveValidator.Init();
+		moveGenerator.Init(this);
+		moveValidator.Init(this);
 		move.OnMoveFinish += OnMoveFinish;
 		SetNextDestination ();
 	}
