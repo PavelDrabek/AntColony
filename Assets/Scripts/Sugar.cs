@@ -8,6 +8,6 @@ public class Sugar : MonoBehaviour {
 
 	public GameObject GetPeace() {
 		amount -= 1;
-		return null;
+		return new GameObject("sugar peace");
 	}
 }

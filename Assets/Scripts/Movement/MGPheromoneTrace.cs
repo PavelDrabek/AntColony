@@ -32,7 +32,14 @@ public class MGPheromoneTrace : MoveGenerator {
 			return defaultGenerator.GetNextDestination();
 		}
 
-		return tracingPheromone.nextDestination;
+		Pheromone.PheroPath best = tracingPheromone.pheroPaths[0];
+		for (int i = 1; i < tracingPheromone.pheroPaths.Count; i++) {
+			if (tracingPheromone.pheroPaths[i].power > best.power) {
+				best = tracingPheromone.pheroPaths[i];
+			}
+		}
+
+		return best.destination;
 	}
 
 	void OnTriggerEnter(Collider c) {
