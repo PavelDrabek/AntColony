@@ -37,7 +37,7 @@ public class Ant : MonoBehaviour {
 		SetNextDestination ();
 	}
 
-	private void OnMoveFinish(Vector3 position) {
+	private void OnMoveFinish(Vector3 position, DestinationType type) {
 		if(isReturning) {
 			if(positionHistory.Count > 0) {
 				Pheromone p = Instantiate(prefabPheromone, position, Quaternion.identity) as Pheromone;
@@ -53,7 +53,7 @@ public class Ant : MonoBehaviour {
 	public void SetNextDestination() {
 		if(isReturning) {
 			if(positionHistory.Count > 1) {
-				move.SetDestination(positionHistory[positionHistory.Count - 2]);
+				move.SetDestination(positionHistory[positionHistory.Count - 2], DestinationType.EMPTY);
 			}
 			return;
 		}
@@ -69,17 +69,17 @@ public class Ant : MonoBehaviour {
 			repetition++;
 		} while (!moveValidator.CanMove(nextDestinaton));
 
-		move.SetDestination (nextDestinaton);
+		move.SetDestination (nextDestinaton, DestinationType.EMPTY);
 	}
 
 	void OnTriggerEnter(Collider c) {
-		if(c.gameObject.CompareTag("sugar")) {
+		if(c.gameObject.CompareTag("pheromone")) {
+			Pheromone p = c.gameObject.GetComponent<Pheromone>();
+//			p.Add(QVAL/ distanceSum);
+		} else if(c.gameObject.CompareTag("sugar")) {
 			isReturning = true;
 			sugarPeace = c.gameObject.GetComponent<Sugar>().GetPeace();
 			SetNextDestination();
-		} else if(c.gameObject.CompareTag("pheromone")) {
-			Pheromone p = c.gameObject.GetComponent<Pheromone>();
-//			p.Add(QVAL/ distanceSum);
 		} else if(c.gameObject.CompareTag("anthill")) {
 			isReturning = false;
 			positionHistory.Clear();
